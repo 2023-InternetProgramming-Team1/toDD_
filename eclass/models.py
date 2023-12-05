@@ -5,7 +5,7 @@ class Lecture(models.Model):
     professor = models.CharField(max_length=30)
 
 class Activity(models.Model):
-    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE)
+    lecture = models.ForeignKey(Lecture, on_delete=models.CASCADE, related_name='activities')
     week = models.IntegerField()
     title = models.CharField(max_length=50)
 
@@ -13,10 +13,10 @@ class Assignment(models.Model):
     title = models.CharField(max_length=200)
     due_date = models.DateTimeField()
     content = models.TextField()
-    activity = models.ForeignKey('Activity', on_delete=models.CASCADE)
+    activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='assignments')
 
 class Quiz(models.Model):
     title = models.CharField(max_length=200)
     due_date = models.DateTimeField()
     questions = models.TextField()
-    activity = models.ForeignKey('Activity', on_delete=models.CASCADE)
+    activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='quizzes')
